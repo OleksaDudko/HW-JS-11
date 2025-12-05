@@ -5,38 +5,27 @@ const bankAccount = {
     accountNumber: 829487,
     balance: 2750,
 
-    // deposit() {
-    //     confirm("Ви бажаєте відняти гроші, чи зняти")
-    //     if (confirm === true) {
-    //         const dodatu = prompt("Скільки гривень ви бажаєте поповнити");
-    //         this.balance += dodatu;
-    //         return `На балансі є ${this.balance}`
-    //     }
-    // },
+    deposit(amount) {
+        this.balance += amount
+    },
 
-    // withdraw() {
-    //     if (confirm === false) {
-    //         const vidnyatu = prompt("Cкільки гривень ви бажаїте зняти");
-    //         this.balance += dodatu;
-    //         return `На балансі є ${this.balance}`
-    //     }
-    // }
-
-    action(){
-        confirm("Ви бажаєте поповнити гроші, чи зняти (Ок -- поповнити, Скасувати -- зняти)");
-        if (confirm === true) {
-            const deposit =  prompt("Скільки гривень ви бажаєте поповнити");
-            this.balance += deposit;
-            return alert(`На балансі є ${this.balance} гривень`);
+    withdraw(amount) {
+        if (this.balance < amount) {
+            return `Недостатньо коштів`
         }
-        if (confirm === false) {
-            const withdraw =  prompt("Скільки гривень ви бажаєте зняти");
-            this.balance -= withdraw;
-            return alert(`На балансі є ${this.balance} гривень`);
-        }
-    }
+        this.balance -= amount
+    },
 }
-bankAccount.action();
+
+if (confirm("Бажаєте поповнити рахунок?")) {
+        const amount = Number(prompt("Введіть суму для поповнення"))
+        if (amount > 0) {
+            bankAccount.deposit(amount)
+        }
+        }else if(confirm("Бажаєте зняти гроші?")){
+            const amount = Number(prompt("Введіть суму для зняття"));
+            bankAccount.withdraw(amount)
+        }
 console.log(bankAccount);
 
 // ---------------------------------------------------------------------------------------------------------------------------
